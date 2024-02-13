@@ -1,0 +1,54 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>글쓰기</title>
+    <link rel="stylesheet" href="/css/boardWrite.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="/js/writeBoard.js"></script>
+</head>
+<body layout:fragment="content">
+<div class="container">
+
+<!--    <form action="" method="post" enctype="multipart/form-data">-->
+        <div class="title">
+            <input type="text" placeholder="제목을 입력하세요" name="title" id="title">
+                <input id="select1" name="subject" type="radio" value="NORMAL" checked><label for="select1">일반</label>
+                <input id="select2" name="subject" type="radio" value="NOTICE" ><label for="select2">공지</label>
+        </div>
+        <div class="reference">
+            <span>※ 타인을 비하하는 글은 삼가해 주세요</span>
+            <br>
+            <span>※ 대충 글쓰기 주의사항 적는 곳</span>
+        </div>
+        <div class="content">
+<!--            <input id="file1" name="file" style="display: none" type="file" multiple="multipartFile"/>-->
+            <label for="file1">
+                <img src="" style="width:100px; height:100px; cursor: pointer;">
+            </label>
+            <input type="file" name="file" id="file1"
+                   style="display: none;" multiple>
+<!--            <button id="uploadBtn">업로드</button>-->
+            <br>
+            <div class="img_wrap">
+<!--                이미지 보일곳-->
+            </div>
+            <textarea id="content" type="text" placeholder="내용을 입력하세요" name="content"></textarea>
+        </div>
+
+        <div class="submit">
+            <input type="submit" value="취소">
+            <input id="btn" type="submit" value="등록">
+        </div>
+
+<!--    </form>-->
+
+
+</div>
+</body>
+</html>

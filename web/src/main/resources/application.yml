@@ -1,0 +1,41 @@
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/commu?serverTimezone=Asia/Seoul
+    username: root
+    password: Rhkrehdud12!
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+  devtools:
+    livereload:
+      enabled: false
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+  restart:
+    enable: true
+
+
+server:
+  port: 8080
+
+  servlet:
+    session:
+      cookie:
+        same-site: "none"
+        secure: true
+      tracking-modes: cookie
+
+logging:
+  level:
+    web: info
+
+custom:
+  path: /Users/곽도영/testFile/
+
+#url, username, password check

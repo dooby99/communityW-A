@@ -1,0 +1,68 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>글쓰기</title>
+    <link rel="stylesheet" href="/css/viewBoard.css">
+    <script src="/js/viewBoard.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+</head>
+<body layout:fragment="content">
+
+<div class="container">
+    <h3>
+        <span th:text="${board.get().getTitle()}"></span>
+    </h3>
+    <div class="memberInfo">
+        <span class = "member" th:text="${board.get().getMember().getName()}">작성자나올곳</span>
+<!--        <th:block th:if="${session.memberInfo.id eq board.get().getMember().getId()}">-->
+        <th:block th:if="${session.memberInfo != null and session.memberInfo.id == board.get().getMember().getId()}">
+            <span><a th:text="삭제" th:href="@{/board/delete/{boardId}(boardId=${boardId})}"></a></span>
+            <span><a th:text="수정" th:href="@{/board/edit/{boardId}(boardId=${boardId})}"></a></span>
+        </th:block>
+        <th:block th:unless="${session.memberInfo==null}">
+        </th:block>
+        <span class="localDateTime" th:text="${#temporals.format(board.get().getCreateAt(), 'yyyy.MM.dd HH:mm')}"> | 작성날짜</span>
+    </div>
+    <div class="content">
+        <div th:each="file : ${files}" th:if="file!=null">
+            <img class="getImg" th:src="${file.fullPath}">
+        </div>
+        <span th:text="${board.get().getContent()}">본문</span>
+    </div>
+
+    <!--댓글 보이는 창-->
+    <table class="viewComment">
+        <th></th>
+        <tr class="commentList" th:each="comments : ${comment}">
+                <td class="nick" th:text="${comments.getMember().getName()}">작성자 나오는곳</td>
+                <td class="comment" th:text="${comments.getContent()}">댓글내용
+
+                </td>
+<!--            <td class="localDateTime" th:text="${comments.getLocalDateTime()}">작성시간</td>-->
+            <td class="localDateTime" th:text="${#temporals.format(comments.getCreateAt(), 'yyyy.MM.dd HH:mm')}">작성시간</td>
+
+        </tr>
+
+    </table>
+
+    <!--댓글 입력 창-->
+    <div class="comment">
+        <form th:action="@{/board/comment/{boardId}(boardId=${boardId})}" method="get">
+            <div style="display: flex">
+                <textarea class="writeComment" type="text" name="content"></textarea>
+                <input class="submitComment" type="submit" value="작성">
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>

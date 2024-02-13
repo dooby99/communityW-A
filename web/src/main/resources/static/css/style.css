@@ -1,0 +1,37 @@
+#home:link {
+    color: black;
+    text-decoration: none;
+}
+
+#home:visited {
+    color: black;
+    text-decoration: none;
+}
+
+#home:hover {
+    color: black;
+    text-decoration: underline;
+}
+
+#home {
+    padding-bottom: 19px;
+    font-size: 1.75rem;
+}
+
+.head {
+    width: 80%;
+    text-align: center;
+
+    padding-bottom: 19px;
+    color: #777;
+    border-bottom: 1px solid #e5e5e5;
+    margin: 30px auto;
+}
+
+.foot {
+    width: 80%;
+    padding-top: 19px;
+    color: #777;
+    border-top: 1px solid #e5e5e5;
+    margin: 30px auto auto;
+}

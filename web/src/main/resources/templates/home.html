@@ -1,0 +1,65 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>community</title>
+    <link rel="stylesheet" href="/css/home.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/home.js"></script>
+</head>
+<body layout:fragment="content">
+<div class="container">
+    <div class="login">
+        <th:block th:if="${session.memberInfo==null}">
+            <a href="memberLogin" style="text-decoration: none">로그인</a>
+            <a href="memberRegister" style="text-decoration: none">회원가입</a>
+        </th:block>
+
+        <th:block th:unless="${session.memberInfo==null}">
+                <span th:text="${session.memberInfo.name + '님'}"></span>
+                <a href="/logout" style="text-decoration: none">로그아웃</a>
+        </th:block>
+    </div>
+
+    <div class="write">
+        <a href="boardWrite" style="text-decoration: none">글쓰기</a>
+    </div>
+    <table>
+        <th id="subject">말머리</th>
+        <th id="title">제목</th>
+        <th>작성자</th>
+        <th>등록일자</th>
+
+        <!--공지 맨위-->
+        <tr id="notice" th:each="board : ${noticeList}">
+            <td th:text="공지"></td>
+            <td>
+                <a th:text="${board.title}" th:href="@{/board/{boardId}(boardId=${board.id})}"></a>
+            </td>
+
+            <td th:text="${board.member.name}"></td>
+            <td th:text="${#temporals.format(board.createAt, 'yyyy.MM.dd HH:mm')}"></td>
+        </tr>
+
+        <!--일반 아래-->
+        <tr id="normal" th:each="board : ${normalList}">
+            <td th:text="일반"></td>
+            <td>
+                <a th:text="${board.title}" th:href="@{/board/{boardId}(boardId=${board.id})}"></a>
+            </td>
+
+            <td th:text="${board.member.name}"></td>
+            <td th:text="${#temporals.format(board.createAt, 'yyyy.MM.dd HH:mm')}"></td>
+        </tr>
+    </table>
+
+</div>
+
+
+</body>
+</html>
